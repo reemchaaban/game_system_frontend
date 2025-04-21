@@ -31,8 +31,6 @@ st.markdown("""
     <h1 style='text-align: center;'>🎮 Game System 🎮</h1>
 """, unsafe_allow_html=True)
 
-# some obscure solution to show a success alert and not squeeze it in col2 where the Wake endpoints button is
-# this way the button is centered and the alert doesnt look horrible 
 if "wake_success" not in st.session_state:
     st.session_state.wake_success = False
 
@@ -54,7 +52,7 @@ if st.session_state.wake_success:
     msg_col1, msg_col2, msg_col3 = st.columns([1, 2, 1])
     with msg_col2:
         st.success("All endpoints were successfully pinged!", icon="✅")
-    time.sleep(3) # the duration of the success alert before the whole page is rerendered to remove it - i left it at 3 to make sure the backend is actually on in time
+    time.sleep(3) 
     st.session_state.wake_success = False
     st.rerun()
 
@@ -76,7 +74,6 @@ if st.button("Get player count"):
         print("result:", predicted_count)
         formatted_date = datetime.datetime.strptime("2025-04-15", "%Y-%m-%d").strftime("%A, %B %d, %Y")
         player_count = f"{predicted_count['player_count']:,.2f}"
-        # you can change the color of the box or border here using the hex code
         st.markdown(
             f"""
             <div style="
@@ -185,7 +182,6 @@ if st.button("Get recommendations", disabled=not is_submission_valid()):
 
         for rec in result['recommendations']:
             with st.container():
-                # you can change the color of the boxes or border here using the hex code
                 st.markdown(f"""
                 <div style="
                     border: 2px solid #ffffff;

@@ -72,7 +72,7 @@ if st.button("Get player count"):
         response.raise_for_status()
         predicted_count = response.json()  
         print("result:", predicted_count)
-        formatted_date = datetime.datetime.strptime("2025-04-15", "%Y-%m-%d").strftime("%A, %B %d, %Y")
+        formatted_date = selected_date.strftime("%A, %B %d, %Y")        
         player_count = f"{predicted_count['player_count']:,.2f}"
         st.markdown(
             f"""

@@ -31,31 +31,6 @@ st.markdown("""
     <h1 style='text-align: center;'>🎮 Game System 🎮</h1>
 """, unsafe_allow_html=True)
 
-if "wake_success" not in st.session_state:
-    st.session_state.wake_success = False
-
-col1, col2, col3 = st.columns([2, 2, 1])
-with col2:
-    if st.button("Wake endpoints"):
-        try:
-            urls = [EEP_WAKE_URL, IEP1_WAKE_URL, IEP2_WAKE_URL]
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                futures = [executor.submit(requests.get, url) for url in urls]
-                results = [future.result() for future in futures]
-            print(results)
-            st.session_state.wake_success = True
-            st.rerun()
-        except Exception as e:
-            st.error(f"Error sending data: {e}")
-
-if st.session_state.wake_success:
-    msg_col1, msg_col2, msg_col3 = st.columns([1, 2, 1])
-    with msg_col2:
-        st.success("All endpoints were successfully pinged!", icon="✅")
-    time.sleep(3) 
-    st.session_state.wake_success = False
-    st.rerun()
-
 st.markdown("---")
 
 st.title("Model 1: Player Count Predictor")
